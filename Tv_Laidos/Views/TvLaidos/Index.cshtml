@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Tv_Laidos.ViewModels.TvLaidaViewModel> 
+
+@{
+    ViewBag.Title = "TV Laidos";
+}
+
+<h2>TV Laidos</h2>
+
+
+
+<p>
+    @Html.ActionLink("Nauja TV Laida", "Create", "TVLaida", new { @class = "btn btn-success" })
+</p>
+
+<table class="table table-striped datatable" border="1">
+    <thead>
+        <tr style="background-color: lightgreen">
+            @* Pridedami lenteliu pavadinimai *@
+            <th>
+                @Html.DisplayNameFor(model => model.id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pavadinimas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isleidimo_metai)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.amziaus_reikalavimas)
+            </th>
+            <th style="width: 20%"></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        
+        @* Pridedama kiekviena eilute *@
+        @foreach (var laida in Model)
+        {
+            <tr >
+                <td>
+                    @Html.DisplayFor(modelItem => laida.id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => laida.pavadinimas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => laida.isleidimo_metai)
+                </td>
+                <td>
+                     @Html.DisplayFor(modelItem => laida.amziaus_reikalavimas)
+
+                </td>
+
+                <td>
+                    @Html.ActionLink("Redaguoti", "Edit", new { id = laida.id }, new { @class = "btn btn-primary action" })
+                    @Html.ActionLink("Pašalinti", "Delete", new { id = laida.id }, new { @class = "btn btn-danger action" })
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+
+</table>

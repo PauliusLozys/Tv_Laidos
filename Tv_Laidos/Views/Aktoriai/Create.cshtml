@@ -1,0 +1,70 @@
+﻿@model Tv_Laidos.ViewModels.AktoriusEditViewModel
+
+@{
+    ViewBag.Title = "Naujas aktorius";
+}
+
+<h2>Naujas aktorius</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken();
+
+    <fieldset>
+        <legend>Aktorio informacija</legend>
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @* Pavadinimo laukelis *@
+            <div class="form-group">
+                @Html.LabelFor(model => model.vardas, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.vardas, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.vardas, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @* Trukems laukelis *@
+            <div class="form-group">
+                @Html.LabelFor(model => model.pavarde, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.pavarde, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.pavarde, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @* Isleidimo metu laukelis *@
+            <div class="form-group">
+                @Html.LabelFor(model => model.gimimo_metai, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.gimimo_metai, new { htmlAttributes = new { @class = "form-control datetime-picker" } })
+                    @Html.ValidationMessageFor(model => model.gimimo_metai, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @* Lyties laukelis *@
+            <div class="form-group">
+                @Html.LabelFor(model => model.lytis, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.fk_modelis, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.DropDownListFor(model => model.lytis, Model.LytisList, "--------------", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.lytis, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Išsaugoti" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Atgal į sąrašą »", "Index", "TvLaidos", new { @class = "btn btn-default" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,61 @@
+﻿@model Tv_Laidos.ViewModels.TvLaidaEditViewModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>TV Laidos šalinimas</h2>
+
+<h3>Ar tikrai norite pašalinti šią TV Laidą?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.id_TV_LAIDA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_TV_LAIDA)
+        </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.pavadinimas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pavadinimas)
+        </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.isleidimo_metai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isleidimo_metai)
+        </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.reitingai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.reitingai)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+<div class="form-actions no-color">
+    <input type="submit" value="Šalinti" class="btn btn-danger" />
+    @Html.ActionLink("Atgal į sąrašą", "Index", "TvLaida", new { @class = "btn btn-default" })
+</div>
+    }
+</div>

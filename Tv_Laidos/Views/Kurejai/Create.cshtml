@@ -1,0 +1,164 @@
+﻿@model Tv_Laidos.ViewModels.KurejasEditViewModel
+
+@{
+    ViewBag.Title = "Naujas kūrėjas";
+    var psl_k_count = 0;
+}
+
+<h2>Naujas kūrėjas</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken();
+
+    <fieldset>
+        <legend>Kurėjo informacija</legend>
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @* Pavadinimo laukelis *@
+            <div class="form-group">
+                @Html.LabelFor(model => model.vardas, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.vardas, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.vardas, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @* Trukems laukelis *@
+            <div class="form-group">
+                @Html.LabelFor(model => model.pavarde, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.pavarde, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.pavarde, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @* Isleidimo metu laukelis *@
+            <div class="form-group">
+                @Html.LabelFor(model => model.gimimo_metai, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.gimimo_metai, new { htmlAttributes = new { @class = "form-control datetime-picker" } })
+                    @Html.ValidationMessageFor(model => model.gimimo_metai, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @* reitingu laukelis *@
+            <div class="form-group">
+                @Html.LabelFor(model => model.role, htmlAttributes: new { @class = "control-label col-md-2" });
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.role, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.role, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @* Lyties laukelis *@
+            <div class="form-group">
+                @Html.LabelFor(model => model.lytis, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.fk_modelis, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.DropDownListFor(model => model.lytis, Model.LytisList, "--------------", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.lytis, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Išsaugoti" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    if (Model.kuriaLaidas != null)
+        {
+            psl_k_count = Model.kuriaLaidas.Count;
+        }
+        else
+        {
+            psl_k_count = 0;
+        }
+
+    <fieldset>
+        <legend>Kuriamos TV Laidos</legend>
+
+        <table class="table table-responsive" id="laidos_tbl">
+            <thead>
+                <tr>
+                    <th>TV Laida</th>
+                    <th ></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{for (int i = 0; i < Model.kuriaLaidas.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                <span class="text-hide sel_element" style="display: none;">@Model.kuriaLaidas[i].fk_TV_LAIDAid_TV_LAIDA</span>
+                                @Html.DropDownListFor(model => model.kuriaLaidas[i].fk_TV_LAIDAid_TV_LAIDA, Model.TvLaidosList, new { @class = "form-control" })
+                            </td>
+                            <td><button type="button" class="btn btn-danger" onclick="salinti(this);">šalinti</button></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <input type="hidden" disabled value="@psl_k_count" id="hCount" />
+        <button type="button" id="prideti" class="btn btn-info pull-right" onclick="uzsakyti($('#hCount').val());">
+            <i class="glyphicon-plus-sign"></i>
+            Pridėti
+        </button>
+    </fieldset>
+
+}
+
+<div>
+    @Html.ActionLink("Atgal į sąrašą »", "Index", "TvLaidos", new { @class = "btn btn-default" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+<script>
+
+    function uzsakyti(sk) {
+            var tmp_row = `
+                   <tr>
+                            <td>
+                                <span class="text-hide sel_element"></span>
+                                @Html.DropDownList("kuriaLaidas[0].fk_TV_LAIDAid_TV_LAIDA", Model.TvLaidosList, "--------------", new { @class = "form-control" })
+                            </td>
+                            <td><button type="button" class="btn btn-danger" onclick="salinti(this);">šalinti</button></td>
+                        </tr>`;
+
+            var new_tmp_row = tmp_row.replace(/\[(0)\]/g, "[" + sk + "]");
+
+            $("#laidos_tbl tr:last").after(new_tmp_row);
+
+            $('#hCount').val(Number($('#hCount').val()) + 1);
+
+        }
+
+        function salinti(btn) {
+            $(btn).closest('tr').remove();
+
+            //// Perskaiciuot indeksus
+            var cnt = 0;
+
+            $("#laidos_tbl tbody tr").each(function () {
+                var tmp_row = "<tr>" + $(this).html() + "</tr>";
+                var new_tmp_row = tmp_row.replace(/\[(.)\]/g, "[" + cnt + "]");
+                new_tmp_row = new_tmp_row.replace(/\_(.)\_/g, "_" + cnt + "_");
+                $(this).replaceWith(new_tmp_row);
+                cnt = cnt + 1;
+            });
+
+            $('#hCount').val(cnt);
+
+            $(".sel_element").each(function () {
+                $(this).closest("td").find("select").val($(this).text());
+            });
+        }
+
+</script>
+}

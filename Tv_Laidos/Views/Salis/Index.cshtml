@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Tv_Laidos.Models.Salis>
+
+@{
+    ViewBag.Title = "Šalys";
+}
+
+<h2>Šalys</h2>
+
+
+
+<p>
+    @Html.ActionLink("Nauja šalis", "Create", "Salis", new { @class = "btn btn-success" })
+</p>
+
+<table class="table table-striped datatable" border="1">
+    <thead>
+        <tr style="background-color: lightgreen">
+            @* Pridedami lenteliu pavadinimai *@
+            <th>
+                @Html.DisplayNameFor(model => model.id_SALIS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pavadinimas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.gyventoju_skaicius)
+            </th>
+            <th style="width: 20%"></th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @* Pridedama kiekviena eilute *@
+        @foreach (var salis in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => salis.id_SALIS)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => salis.pavadinimas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => salis.gyventoju_skaicius)
+                </td>
+
+
+                <td>
+                    @Html.ActionLink("Redaguoti", "Edit", new { id = salis.id_SALIS }, new { @class = "btn btn-primary action" })
+                    @Html.ActionLink("Pašalinti", "Delete", new { id = salis.id_SALIS }, new { @class = "btn btn-danger action" })
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+
+</table>

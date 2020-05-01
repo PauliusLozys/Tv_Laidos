@@ -1,0 +1,61 @@
+﻿@model Tv_Laidos.ViewModels.KurejasEditViewModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Kurėjo šalinimas</h2>
+
+<h3>Ar tikrai norite pašalinti šį kūrėja?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.id_KUREJAS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_KUREJAS)
+        </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.vardas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.vardas)
+        </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.pavarde)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pavarde)
+        </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.gimimo_metai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gimimo_metai)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Šalinti" class="btn btn-danger" />
+            @Html.ActionLink("Atgal į sąrašą", "Index", "Kurejai", new { @class = "btn btn-default" })
+        </div>
+    }
+</div>

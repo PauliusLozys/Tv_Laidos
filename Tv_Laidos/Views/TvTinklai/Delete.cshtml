@@ -1,0 +1,71 @@
+﻿@model Tv_Laidos.Models.TvTinklas
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>TV tinklo šalinimas</h2>
+
+<h3>Ar tikrai norite pašalinti šią TV Laidą?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.id_TV_TINKLAS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_TV_TINKLAS)
+        </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.pavadinimas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pavadinimas)
+        </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.vadovas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.vadovas)
+        </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.savininkas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.savininkas)
+        </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ziurovu_skaicius)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ziurovu_skaicius)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Šalinti" class="btn btn-danger" />
+            @Html.ActionLink("Atgal į sąrašą", "Index", "TvLaida", new { @class = "btn btn-default" })
+        </div>
+    }
+</div>

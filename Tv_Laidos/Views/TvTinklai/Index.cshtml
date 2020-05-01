@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Tv_Laidos.ViewModels.TvTinklaiViewModel>
+
+@{
+    ViewBag.Title = "Tv Tinklai";
+}
+
+<h2>Tv tinklai</h2>
+
+
+
+<p>
+    @Html.ActionLink("Naujas TV tinklas", "Create", "TvTinklai", new { @class = "btn btn-success" })
+</p>
+
+<table class="table table-striped datatable" border="1">
+    <thead>
+        <tr style="background-color: lightgreen">
+            @* Pridedami lenteliu pavadinimai *@
+            <th>
+                @Html.DisplayNameFor(model => model.id_TV_TINKLAS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pavadinimas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.vadovas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fk_SALIS_id_SALIS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.adresas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.savininkas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ziurovu_skaicius)
+            </th>
+            <th style="width: 20%"></th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @* Pridedama kiekviena eilute *@
+        @foreach (var tinklas in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => tinklas.id_TV_TINKLAS)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => tinklas.pavadinimas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => tinklas.vadovas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => tinklas.fk_SALIS_id_SALIS)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => tinklas.adresas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => tinklas.savininkas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => tinklas.ziurovu_skaicius)
+            </td>
+
+            <td>
+                @Html.ActionLink("Redaguoti", "Edit", new { id = tinklas.id_TV_TINKLAS}, new { @class = "btn btn-primary action" })
+                @Html.ActionLink("Pašalinti", "Delete", new { id = tinklas.id_TV_TINKLAS }, new { @class = "btn btn-danger action" })
+            </td>
+        </tr>
+        }
+
+    </tbody>
+
+
+</table>

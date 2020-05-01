@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Tv_Laidos.ViewModels.KurejasViewModel>
+
+@{
+    ViewBag.Title = "Kurejai";
+}
+
+<h2>Visi Kūrėjai</h2>
+
+
+
+<p>
+    @Html.ActionLink("Naujas kūrėjas", "Create", "Kurejai", new { @class = "btn btn-success" })
+</p>
+
+<table class="table table-striped datatable" border="1">
+    <thead>
+        <tr style="background-color: lightgreen">
+            @* Pridedami lenteliu pavadinimai *@
+            <th>
+                @Html.DisplayNameFor(model => model.id_KUREJAS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.vardas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pavarde)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.gimimo_metai)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.role)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.lytis)
+            </th>
+            <th style="width: 20%"></th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @* Pridedama kiekviena eilute *@
+        @foreach (var aktorius in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => aktorius.id_KUREJAS)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => aktorius.vardas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => aktorius.pavarde)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => aktorius.gimimo_metai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => aktorius.role)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => aktorius.lytis)
+            </td>
+
+            <td>
+                @Html.ActionLink("Redaguoti", "Edit", new { id = aktorius.id_KUREJAS }, new { @class = "btn btn-primary action" })
+                @Html.ActionLink("Pašalinti", "Delete", new { id = aktorius.id_KUREJAS }, new { @class = "btn btn-danger action" })
+            </td>
+        </tr>
+        }
+
+    </tbody>
+
+
+</table>
+

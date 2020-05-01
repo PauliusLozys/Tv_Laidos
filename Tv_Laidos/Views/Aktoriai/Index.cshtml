@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Tv_Laidos.ViewModels.AktoriusViewModel>
+
+@{
+    ViewBag.Title = "Aktoriai";
+}
+
+    <h2>Visi aktoriai</h2>
+
+
+
+<p>
+    @Html.ActionLink("Naujas aktorius", "Create", "Aktoriai", new { @class = "btn btn-success" })
+</p>
+
+<table class="table table-striped datatable" border="1">
+    <thead>
+        <tr style="background-color: lightgreen">
+            @* Pridedami lenteliu pavadinimai *@
+            <th>
+                @Html.DisplayNameFor(model => model.id_AKTORIUS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.vardas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pavarde)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.gimino_metai)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.lytis)
+            </th>
+            <th style="width: 20%"></th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @* Pridedama kiekviena eilute *@
+        @foreach (var aktorius in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => aktorius.id_AKTORIUS)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => aktorius.vardas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => aktorius.pavarde)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => aktorius.gimino_metai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => aktorius.lytis)
+            </td>
+
+            <td>
+                @Html.ActionLink("Redaguoti", "Edit", new { id = aktorius.id_AKTORIUS }, new { @class = "btn btn-primary action" })
+                @Html.ActionLink("Pašalinti", "Delete", new { id = aktorius.id_AKTORIUS }, new { @class = "btn btn-danger action" })
+            </td>
+        </tr>
+        }
+
+    </tbody>
+
+
+</table>
+

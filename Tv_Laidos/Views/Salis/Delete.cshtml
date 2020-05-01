@@ -1,0 +1,51 @@
+﻿@model Tv_Laidos.Models.Salis
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Šalies šalinimas</h2>
+
+<h3>Ar tikrai norite pašalinti šį aktorių?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.id_SALIS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_SALIS)
+        </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.pavadinimas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pavadinimas)
+        </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.gyventoju_skaicius)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gyventoju_skaicius)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Šalinti" class="btn btn-danger" />
+            @Html.ActionLink("Atgal į sąrašą", "Index", "Aktoriai", new { @class = "btn btn-default" })
+        </div>
+    }
+</div>

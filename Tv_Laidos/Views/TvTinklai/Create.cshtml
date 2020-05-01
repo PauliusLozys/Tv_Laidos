@@ -1,0 +1,89 @@
+﻿@model Tv_Laidos.Models.TvTinklas
+
+@{
+    ViewBag.Title = "Naujas TV Tinklas";
+}
+
+<h2>Naujas TV tinklas</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken();
+
+    <fieldset>
+        <legend>TV tinklo informacija</legend>
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @* Pavadinimo laukelis *@
+            <div class="form-group">
+                @Html.LabelFor(model => model.pavadinimas, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.pavadinimas, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.pavadinimas, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @* Savininko laukelis *@
+            <div class="form-group">
+                @Html.LabelFor(model => model.savininkas, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.savininkas, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.savininkas, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @* Vadovo laukelis *@
+            <div class="form-group">
+                @Html.LabelFor(model => model.vadovas, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.vadovas, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.vadovas, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @* Adreso laukelis *@
+            <div class="form-group">
+                @Html.LabelFor(model => model.adresas, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.adresas, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.adresas, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @* Ziurovu laukelis *@
+            <div class="form-group">
+                @Html.LabelFor(model => model.ziurovu_skaicius, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ziurovu_skaicius, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ziurovu_skaicius, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @* Salies laukelis *@
+            <div class="form-group">
+                @Html.LabelFor(model => model.fk_SALIS_id_SALIS, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.fk_modelis, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.DropDownListFor(model => model.fk_SALIS_id_SALIS, Model.salis, "--------------", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.fk_SALIS_id_SALIS, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Išsaugoti" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+
+
+    </fieldset>
+}
+<div>
+    @Html.ActionLink("Atgal į sąrašą »", "Index", "TvTinklai", new { @class = "btn btn-default" })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
