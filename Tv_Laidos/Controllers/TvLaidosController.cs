@@ -38,8 +38,6 @@ namespace Tv_Laidos.Controllers
         {
             try
             {
-                if(ModelState.IsValid)
-                {
                     int laidos_id = tvLaidos.addShow(laida);
 
                     if (laidos_id < 0)
@@ -59,7 +57,6 @@ namespace Tv_Laidos.Controllers
                             }
                         }
                     }
-                }
                 // TODO: Add insert logic here
                 return RedirectToAction("Index");
             }

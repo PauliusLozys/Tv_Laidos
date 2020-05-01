@@ -35,23 +35,20 @@ namespace Tv_Laidos.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
+                int kurejoID = kurejai.addKurejas(kurejas);
+
+                if (kurejoID < 0)
                 {
-                    int kurejoID = kurejai.addKurejas(kurejas);
+                    ViewBag.failed = "Nepavyko iterpti apdovanojimo";
+                    return View(kurejas);
+                }
 
-                    if (kurejoID < 0)
+                if (kurejas.kuriaLaidas != null)
+                {
+                    foreach (var item in kurejas.kuriaLaidas)
                     {
-                        ViewBag.failed = "Nepavyko iterpti apdovanojimo";
-                        return View(kurejas);
-                    }
-
-                    if (kurejas.kuriaLaidas != null)
-                    {
-                        foreach (var item in kurejas.kuriaLaidas)
-                        {
-                            item.fk_KUREJASid_KUREJAS = kurejoID;
-                            kuriaRepo.addKuriamas(item);
-                        }
+                        item.fk_KUREJASid_KUREJAS = kurejoID;
+                        kuriaRepo.addKuriamas(item);
                     }
                 }
 

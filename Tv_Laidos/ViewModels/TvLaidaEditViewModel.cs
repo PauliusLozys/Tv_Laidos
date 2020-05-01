@@ -29,7 +29,7 @@ namespace Tv_Laidos.ViewModels
         [Required]
         public float reitingai { get; set; }
         [DisplayName("Vidutinis įvertinimas")]
-        //[DataType(DataType.Currency)]
+        [DataType(DataType.Currency)]
         [Range(1, 10.0f)]
         [Required]
         public float ziurovu_vidutinis_ivertinimas { get; set; }
