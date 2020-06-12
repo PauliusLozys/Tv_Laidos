@@ -1,0 +1,195 @@
+﻿@model Tv_Laidos.ViewModels.AtaskaitaViewModel
+
+@{
+    ViewBag.Title = "Tv laidų ataskaita";
+    int VisoLaidos = 0;
+}
+
+<h2>Ataskaitos filtrai</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+
+        <label>Metai nuo: </label>
+        @Html.EditorFor(model => model.NuoMetai, new { @class = "form-control" })
+        <label>Metai iki: </label>
+        @Html.EditorFor(model => model.IkiMetai, new { @class = "form-control" })
+        <label>Reitingas nuo: </label>
+        @Html.EditorFor(model => model.NuoReitingas, new { @class = "form-control" })
+        <div>
+            <label>Laidos busena: </label>
+            @Html.DropDownListFor(model => model.LaidosBusena, Model.BusenaList, "--------------", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.LaidosBusena, "", new { @class = "text-danger" })
+        </div>
+
+        <div>
+            <input class="btn btn-default" type="submit" value="Atrinkti">
+        </div>
+    </div>
+
+}
+
+<table class="table table-striped" border="0" >
+    <tr style="background-color:lightblue">
+        <th align="center">
+            @Html.DisplayNameFor(model => model.tvlaidos[0].Pavadinimas)
+        </th>
+        <th align="center">
+            @Html.DisplayNameFor(model => model.tvlaidos[0].ZiurovuIvertinimas)
+        </th>
+        <th align="center">
+            @Html.DisplayNameFor(model => model.tvlaidos[0].Metai)
+        </th>
+        <th align="center">
+            @Html.DisplayNameFor(model => model.tvlaidos[0].Zanras)
+        </th>
+        <th align="center">
+            @Html.DisplayNameFor(model => model.tvlaidos[0].Laidos_Busena)
+        </th>
+        <th align="center">
+            @Html.DisplayNameFor(model => model.tvlaidos[0].EpizoduSkaicius)
+        </th>
+        <th align="center">
+            @Html.DisplayNameFor(model => model.tvlaidos[0].ApdovanojimuKiekis)
+        </th>
+        <th align="center">
+            @Html.DisplayNameFor(model => model.tvlaidos[0].kurejuKiekis)
+        </th>
+        <th align="center">
+            @Html.DisplayNameFor(model => model.tvlaidos[0].SezonoNumeris)
+        </th>
+        <th align="center">
+            @Html.DisplayNameFor(model => model.tvlaidos[0].IsleidimoData)
+        </th>
+        <th align="center">
+            @Html.DisplayNameFor(model => model.tvlaidos[0].PabaigosData)
+        </th>
+    </tr>
+
+    @if (Model.tvlaidos.Count == 0)
+    {
+        <tr>
+            <td colspan="4" align="center"><b style="color:red;">Pagal paieskos kriterijus laidu nerasta</b></td>
+        </tr>
+    }
+
+    @for (int i = 0; i < Model.tvlaidos.Count; i += Model.tvlaidos[i].SezonuKiekis == -1 ? 1 : Model.tvlaidos[i].SezonuKiekis)
+    {
+        VisoLaidos++;
+        <tr style="background-color: lightgray">
+            <td>@Html.DisplayFor(model => model.tvlaidos[i].Pavadinimas)</td>
+            <td align="right">@Model.tvlaidos[i].ZiurovuIvertinimas</td>
+            <td>@Html.DisplayFor(model => model.tvlaidos[i].Metai)</td>
+            @*<td align="right" typeof="date">@Model.tvlaidos[i].Metai.Date</td>*@
+            <td>@Model.tvlaidos[i].Zanras</td>
+            <td>@Model.tvlaidos[i].Laidos_Busena</td>
+            @if (Model.tvlaidos[i].EpizoduSkaicius == -1)
+            {
+                <td align="right">Nerasta</td>
+            }
+            else
+            {
+                <td align="right">@Model.tvlaidos[i].EpizoduSkaicius</td>
+            }
+            @if (Model.tvlaidos[i].ApdovanojimuKiekis == -1)
+            {
+                <td align="right">Nerasta</td>
+            }
+            else
+            {
+                <td align="right">@Model.tvlaidos[i].ApdovanojimuKiekis</td>
+            }
+            @if (Model.tvlaidos[i].kurejuKiekis == -1)
+            {
+                <td align="right">Nerasta</td>
+            }
+            else
+            {
+                <td align="right">@Model.tvlaidos[i].kurejuKiekis</td>
+            }
+            @if (Model.tvlaidos[i].SezonoNumeris == -1)
+            {
+                <td align="right">Nerasta</td>
+            }
+            else
+            {
+                <td align="right">@Model.tvlaidos[i].SezonoNumeris</td>
+            }
+            @if (Model.tvlaidos[i].IsleidimoData == -1)
+            {
+                <td align="right">Nerasta</td>
+            }
+            else
+            {
+                <td align="right">@Model.tvlaidos[i].IsleidimoData</td>
+            }
+            @if (Model.tvlaidos[i].PabaigosData == -1)
+            {
+                <td align="right">Nerasta</td>
+            }
+            else
+            {
+                <td align="right">@Model.tvlaidos[i].PabaigosData</td>
+            }
+
+        </tr>
+
+        for (int j = i + 1; j < Model.tvlaidos[i].SezonuKiekis + i; j++)
+        {
+
+        <tr style="background-color: lightgray">
+            <td colspan="8" style="background-color: white" ></td>
+            <td align="right">@Model.tvlaidos[j].SezonoNumeris</td>
+            <td align="right">@Model.tvlaidos[j].IsleidimoData</td>
+            <td align="right">@Model.tvlaidos[j].PabaigosData</td>
+        </tr>
+        }
+
+        <tr style="background-color: pink">
+
+            <td style="background-color: white" colspan="5"></td>
+            <td align="center"><b>Min sezono ivertinimas:</b></td>
+            @if (Model.tvlaidos[i].MinIvertinimas == -1)
+            {
+                <td align="right">Nezinoma</td>
+            }
+            else
+            {
+                <td align="right">@Model.tvlaidos[i].MinIvertinimas</td>
+            }
+
+            <td align="center"><b>Max sezono ivertinimas:</b></td>
+            @if (Model.tvlaidos[i].MaxIvertinimas == -1)
+            {
+                <td align="right">Nezinoma</td>
+            }
+            else
+            {
+                <td align="right">@Model.tvlaidos[i].MaxIvertinimas</td>
+            }
+
+
+            <td align="center"><b>Is viso sezonu:</b></td>
+            @if (Model.tvlaidos[i].SezonuKiekis == -1)
+            {
+                <td align="right">Sezonu nerasta</td>
+            }
+            else
+            {
+                <td align="right">@Model.tvlaidos[i].SezonuKiekis</td>
+            }
+        </tr>
+
+
+        if (i == Model.tvlaidos.Count - 1)
+        {
+            <tr style="background-color: wheat">
+                <td colspan="10" align="right"><b>Is viso rasta laidu</b></td>
+                <td align="right"><b>@VisoLaidos</b></td>
+            </tr>
+        }
+        
+    }
+</table>
+

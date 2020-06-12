@@ -166,6 +166,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AktoriaiController.cs" />
+    <Compile Include="Controllers\AtaskaitaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KurejaiController.cs" />
     <Compile Include="Controllers\SalisController.cs" />
@@ -193,6 +194,7 @@
     <Compile Include="Repos\AktoriaiRepository.cs" />
     <Compile Include="Repos\AmziausCenzaiRepository.cs" />
     <Compile Include="Repos\ApdovanojimaiRepository.cs" />
+    <Compile Include="Repos\AtaskaitaRepository.cs" />
     <Compile Include="Repos\KategorijosRepository.cs" />
     <Compile Include="Repos\KurejaiRepository.cs" />
     <Compile Include="Repos\KuriaRepository.cs" />
@@ -203,8 +205,10 @@
     <Compile Include="Repos\TvTinklaiRepository.cs" />
     <Compile Include="ViewModels\AktoriusEditViewModel.cs" />
     <Compile Include="ViewModels\AktoriusViewModel.cs" />
+    <Compile Include="ViewModels\AtaskaitaViewModel.cs" />
     <Compile Include="ViewModels\KurejasEditViewModel.cs" />
     <Compile Include="ViewModels\KurejasViewModel.cs" />
+    <Compile Include="ViewModels\SAtaskaitaViewModel.cs" />
     <Compile Include="ViewModels\TvLaidaEditViewModel.cs" />
     <Compile Include="ViewModels\TvLaidaViewModel.cs" />
     <Compile Include="ViewModels\TvTinklaiViewModel.cs" />
@@ -264,6 +268,7 @@
     <Content Include="Views\Salis\Create.cshtml" />
     <Content Include="Views\Salis\Edit.cshtml" />
     <Content Include="Views\Salis\Delete.cshtml" />
+    <Content Include="Views\Ataskaita\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

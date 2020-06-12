@@ -38,7 +38,7 @@ namespace Tv_Laidos.Repos
                 {
                     id = Convert.ToInt32(item["id_TV_LAIDA"]),
                     pavadinimas = Convert.ToString(item["pavadinimas"]),
-                    isleidimo_metai = Convert.ToInt32(item["isleidimo_metai"]),
+                    isleidimo_metai = Convert.ToDateTime(item["isleidimo_metai"]),
                     amziaus_reikalavimas = Convert.ToString(item["cenzas"])
                 });
             }
@@ -79,7 +79,7 @@ namespace Tv_Laidos.Repos
                 modelis.id_TV_LAIDA = Convert.ToInt32(item["id_TV_LAIDA"]) ;
                 modelis.pavadinimas = Convert.ToString(item["pavadinimas"]);
                 modelis.trukme = Convert.ToInt32(item["trukme"]);
-                modelis.isleidimo_metai = Convert.ToInt32(item["isleidimo_metai"]);
+                modelis.isleidimo_metai = Convert.ToDateTime(item["isleidimo_metai"]);
                 modelis.reitingai = (float)Convert.ToDouble(item["reitingai"]);
                 modelis.ziurovu_vidutinis_ivertinimas = (float)Convert.ToDouble(item["ziurovu_vidutinis_ivertinimas"]);
                 modelis.aprasymas = Convert.ToString(item["aprasymas"]);
@@ -104,7 +104,7 @@ namespace Tv_Laidos.Repos
             MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
             mySqlCommand.Parameters.Add("?pavadinimas", MySqlDbType.VarChar).Value = laida.pavadinimas;
             mySqlCommand.Parameters.Add("?trukme", MySqlDbType.Int32).Value = laida.trukme;
-            mySqlCommand.Parameters.Add("?isleidimo_metai", MySqlDbType.Int32).Value = laida.isleidimo_metai;
+            mySqlCommand.Parameters.Add("?isleidimo_metai", MySqlDbType.Date).Value = laida.isleidimo_metai;
             mySqlCommand.Parameters.Add("?reitingai", MySqlDbType.Float).Value = laida.reitingai;
             mySqlCommand.Parameters.Add("?ziurovu_vidutinis_ivertinimas", MySqlDbType.Float).Value = laida.ziurovu_vidutinis_ivertinimas;
             mySqlCommand.Parameters.Add("?aprasymas", MySqlDbType.VarChar).Value = laida.aprasymas;
@@ -138,7 +138,7 @@ namespace Tv_Laidos.Repos
             MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
             mySqlCommand.Parameters.Add("?pavadinimas", MySqlDbType.VarChar).Value = laida.pavadinimas;
             mySqlCommand.Parameters.Add("?trukme", MySqlDbType.Int32).Value = laida.trukme;
-            mySqlCommand.Parameters.Add("?isleidimo_metai", MySqlDbType.Int32).Value = laida.isleidimo_metai;
+            mySqlCommand.Parameters.Add("?isleidimo_metai", MySqlDbType.Date).Value = laida.isleidimo_metai;
             mySqlCommand.Parameters.Add("?reitingai", MySqlDbType.Float).Value = laida.reitingai;
             mySqlCommand.Parameters.Add("?ziurovu_vidutinis_ivertinimas", MySqlDbType.Float).Value = laida.ziurovu_vidutinis_ivertinimas;
             mySqlCommand.Parameters.Add("?aprasymas", MySqlDbType.VarChar).Value = laida.aprasymas;

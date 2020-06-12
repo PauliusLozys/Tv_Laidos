@@ -22,9 +22,10 @@ namespace Tv_Laidos.ViewModels
         [Required]
         public int trukme { get; set; }
         [DisplayName("Išleidimo metai")]
-        
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Required]
-        public int isleidimo_metai { get; set; }
+        public DateTime isleidimo_metai { get; set; }
         [DisplayName("Reitingai")]
         [Required]
         public float reitingai { get; set; }
